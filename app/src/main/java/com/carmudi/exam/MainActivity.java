@@ -4,58 +4,103 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.carmudi.exam.adapter.ListCarAdapter;
+import com.carmudi.exam.adapter.enums.SortByType;
 import com.carmudi.exam.client.model.Results;
-import com.carmudi.exam.customview.ExpandableHeightListView;
-import com.carmudi.exam.customview.ScrollViewExt;
 import com.carmudi.exam.presenter.MainPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainPresenter.Listener, ScrollViewExt.ScrollViewListener {
+public class MainActivity extends AppCompatActivity implements MainPresenter.Listener
+    {
 
     private static final int PAGE_START = 1;
     private static final int NUM_PER_PAGE = 10;
 
     private int currentPage = PAGE_START;
     private MainPresenter mainPresenter;
-    private String sortBy = "newest";
+    private SortByType sortByType;
 
-    private ExpandableHeightListView listCar;
+    private ListView listCar;
     private ListCarAdapter listCarAdapter;
     private SwipeRefreshLayout swipeContainer;
+    private Spinner spinnerSortBy;
     private List<Results> resultsList;
-    private ScrollViewExt scrollView;
     private boolean isLoading;
     private int totalItemsCount;
 
+    private int diff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scrollView = (ScrollViewExt) findViewById(R.id.scroll_metrics_item);
-        scrollView.setScrollViewListener(this);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer_activity_main);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 refreshData();
+
             }
         });
-        listCar = (ExpandableHeightListView) findViewById(R.id.list_car_item);
-        listCar.setExpanded(true);
+        final ArrayAdapter<SortByType> sortByAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, SortByType.values());
+        sortByAdapter.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerSortBy = (Spinner) findViewById(R.id.spinner_sort_list);
+        spinnerSortBy.setAdapter(sortByAdapter);
+
+        listCar = (ListView) findViewById(R.id.list_car_item);
+        listCar.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                View view = listCar.getChildAt(listCar.getChildCount() - 1);
+                diff = (view.getBottom() - (listCar.getHeight() + listCar.getScrollY()));
+
+                // if diff is zero, then the bottom has been reached
+                if (diff == 0 && !isLoading && resultsList != null && resultsList.size() < totalItemsCount) {
+                    isLoading = true;
+                    currentPage++;
+                    startGetData();
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+            }
+        });
 
         this.mainPresenter = new MainPresenter(this, this, this);
-        startGetData();
+
+        spinnerSortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                sortByType = SortByType.values()[position];
+                refreshData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
 
     private void refreshData(){
-        currentPage = 1;
+        listCar.setVisibility(View.GONE);
+        currentPage = PAGE_START;
         startGetData();
     }
 
@@ -64,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         Thread startGetData = new Thread(new Runnable() {
             @Override
             public void run() {
-                mainPresenter.getData(currentPage, sortBy, NUM_PER_PAGE);
+                mainPresenter.getData(currentPage, sortByType.getQueryValue(), NUM_PER_PAGE);
             }
         });
         startGetData.start();
@@ -75,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
 
         this.isLoading = false;
         this.totalItemsCount = totalProductCount;
-
+        listCar.setVisibility(View.VISIBLE);
         if(results != null && !results.isEmpty()) {
 
             if(page <= PAGE_START) {
@@ -87,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
             listCarAdapter = new ListCarAdapter(this, resultsList);
             listCar.setAdapter(listCarAdapter);
             listCarAdapter.notifyDataSetChanged();
+
+            if(page > PAGE_START) {
+                listCar.smoothScrollToPosition(listCarAdapter.getCount()-6);
+            }
         }
 
 
@@ -99,18 +148,5 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
     @Override
     public void errorOccurred(String error) {
 
-    }
-
-    @Override
-    public void onScrollChanged(ScrollViewExt scrollView, int x, int y, int oldx, int oldy) {
-        View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
-        int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
-
-        // if diff is zero, then the bottom has been reached
-        if (diff == 0 && !isLoading && resultsList != null && resultsList.size() < totalItemsCount) {
-                isLoading = true;
-                currentPage++;
-                startGetData();
-        }
     }
 }
