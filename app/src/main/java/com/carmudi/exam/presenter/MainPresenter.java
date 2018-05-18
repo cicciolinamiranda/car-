@@ -31,7 +31,7 @@ public class MainPresenter {
         this.mListener = listener;
     }
 
-    public void getData(int page, String sortby, int numperpage) {
+    public void getData(final int page, final String sortby, final int numperpage) {
         new RestGetItemsAsyncTask(this.mContext.getString(R.string.endpoint_server), page, numperpage, sortby,
                 new RestGetItemsAsyncTask.Listener() {
                     @Override
@@ -59,7 +59,7 @@ public class MainPresenter {
                                 }
                             }
 
-                            mListener.getDataResponse(resultsList, total);
+                            mListener.getDataResponse(resultsList, total, page);
 
                         } catch (ApiException e) {
                             mListener.errorOccurred(e.getLocalizedMessage());
@@ -74,7 +74,7 @@ public class MainPresenter {
     }
 
     public interface Listener {
-        void getDataResponse(List<Results> results, int totalProductCount);
+        void getDataResponse(List<Results> results, int totalProductCount, int page);
         void errorOccurred(String error);
     }
 }
