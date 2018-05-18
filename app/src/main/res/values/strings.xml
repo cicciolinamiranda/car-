@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Carmudi</string>
+    <string name="endpoint_server">https://www.carmudi.co.id/api/cars/</string>
 </resources>
