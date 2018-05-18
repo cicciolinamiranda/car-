@@ -8,6 +8,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.carmudi.exam.adapter.ListCarAdapter;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
 
     private ListView listCar;
     private ListCarAdapter listCarAdapter;
+    private ProgressBar progressBar;
     private SwipeRefreshLayout swipeContainer;
     private Spinner spinnerSortBy;
     private List<Results> resultsList;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer_activity_main);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -71,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
                 if (diff == 0 && !isLoading && resultsList != null && resultsList.size() < totalItemsCount) {
                     isLoading = true;
                     currentPage++;
+
+                    if(currentPage > PAGE_START) {
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+
                     startGetData();
                 }
             }
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 sortByType = SortByType.values()[position];
+                progressBar.setVisibility(View.VISIBLE);
                 refreshData();
             }
 
@@ -109,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         Thread startGetData = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 mainPresenter.getData(currentPage, sortByType.getQueryValue(), NUM_PER_PAGE);
             }
         });
@@ -121,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         this.isLoading = false;
         this.totalItemsCount = totalProductCount;
         listCar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         if(results != null && !results.isEmpty()) {
 
             if(page <= PAGE_START) {

@@ -28,18 +28,23 @@ public class ItemDetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(result != null && result.getImages() != null) {
+        if(result != null) {
 
-            for(Images image: result.getImages()) {
+            getSupportActionBar().setTitle(result.getData().getOriginal_name());
 
-                if(image != null && image.getUrl() != null &&
-                        !image.getUrl().isEmpty()) {
-                    ImageData imageData = new ImageData(image.getUrl());
-                    imgSwitcher.addImageData(imageData);
-                    imgSwitcher.goToCurrentImage();
+            if (result.getImages() != null) {
+
+                for (Images image : result.getImages()) {
+
+                    if (image != null && image.getUrl() != null &&
+                            !image.getUrl().isEmpty()) {
+                        ImageData imageData = new ImageData(image.getUrl());
+                        imgSwitcher.addImageData(imageData);
+                        imgSwitcher.goToCurrentImage();
+                    }
                 }
-            }
 
+            }
         }
 
 

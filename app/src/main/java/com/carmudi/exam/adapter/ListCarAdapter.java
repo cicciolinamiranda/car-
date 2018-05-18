@@ -53,11 +53,11 @@ public class ListCarAdapter extends ArrayAdapter<Results> {
                 e.printStackTrace();
             }
         }
-        tvCarPrice.setText(Util.getInstance().withSuffix(price));
-        tvCarName.setText(web.get(position).getData().getName());
+        tvCarPrice.setText("Price: "+Util.getInstance().truncateNumber(price));
+        tvCarName.setText(web.get(position).getData().getOriginal_name());
 
-        TextView tvCarBrand = rowView.findViewById(R.id.tv_car_brand_list_car_data);
-        tvCarBrand.setText(web.get(position).getData().getBrand());
+        TextView tvCarMileage = rowView.findViewById(R.id.tv_car_mileage_list_car_data);
+        tvCarMileage.setText("Mileage: "+web.get(position).getData().getMileage());
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -64,10 +64,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|end"
                         android:text="0Php"
-                        android:textSize="20sp" />
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_car_brand_list_car_data"
+                        android:id="@+id/tv_car_mileage_list_car_data"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|end"

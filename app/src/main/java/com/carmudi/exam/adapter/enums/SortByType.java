@@ -7,10 +7,10 @@ package com.carmudi.exam.adapter.enums;
 public enum SortByType  {
     NEWEST("newest","Newest"),
     OLDEST("oldest","Oldest"),
-    PRICE_LOW("pricelow","Lowest Price"),
-    PRICE_HIGH("pricehigh","Highest Price"),
-    MILE_AGE_LOW("mileagelow","Lowest Mileage"),
-    MILE_AGE_HIGH("mileagehigh","Highest Mileage");
+    PRICE_LOW("price-low","Lowest Price"),
+    PRICE_HIGH("price-high","Highest Price"),
+    MILE_AGE_LOW("mileage-low","Lowest Mileage"),
+    MILE_AGE_HIGH("mileage-high","Highest Mileage");
 
     String queryValue;
     String label
