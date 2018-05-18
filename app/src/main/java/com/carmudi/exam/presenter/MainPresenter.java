@@ -43,13 +43,13 @@ public class MainPresenter {
                             Log.d(MainPresenter.class.getName(), carDataModel.toString());
 
                             int total = 0;
-                            List<Results> resultsList = new ArrayList<Results>();
+                            List<Results> resultsList = new ArrayList<>();
 
                             if(carDataModel != null)
                             {
                                 if(carDataModel.getMetadata() != null &&
                                         carDataModel.getMetadata().getProduct_count() != null &&
-                                        Integer.class.isInstance(carDataModel.getMetadata().getProduct_count())) {
+                                        !carDataModel.getMetadata().getProduct_count().isEmpty()) {
                                     total = Integer.parseInt(carDataModel.getMetadata().getProduct_count());
                                 }
 
@@ -62,6 +62,8 @@ public class MainPresenter {
                             mListener.getDataResponse(resultsList, total);
 
                         } catch (ApiException e) {
+                            mListener.errorOccurred(e.getLocalizedMessage());
+                        } catch (NumberFormatException e) {
                             mListener.errorOccurred(e.getLocalizedMessage());
                         }
 

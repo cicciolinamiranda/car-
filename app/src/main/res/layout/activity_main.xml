@@ -4,10 +4,21 @@
     android:id="@+id/swipeContainer_activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_activity_main"
+    <com.carmudi.exam.customview.ScrollViewExt
+        android:id="@+id/scroll_metrics_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_card_items"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.carmudi.exam.customview.ExpandableHeightListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_car_item"/>
+        </LinearLayout>
+
+    </com.carmudi.exam.customview.ScrollViewExt>
 </android.support.v4.widget.SwipeRefreshLayout>
