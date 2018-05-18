@@ -3,57 +3,27 @@ package com.carmudi.exam.customview.dto;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.File;
-import java.util.ArrayList;
-
 /**
  * Created by cicciolina on 5/18/18.
  */
 
 public class ImageData implements Parcelable {
-    String id; //uuid
-    String name; //pathname
+    String url;
     float mOrientaion;
 
-    public File getFile() {
-        return file;
+    public ImageData(String url) {
+        this.url = url;
     }
-
-    public void setFile(File file) {
-        this.file = file;
-    }
-
-    File file;
-
-    public ImageData() {
-    }
-    public ImageData (String file, ArrayList<String> tags) {
-        this.name = file;
-    }
-
-
-    public String getPathName() {
-        return this.name;
-    }
-
-    public void setPathName(String name) {
-        this.name = name;
-    }
-
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public float getmOrientaion() {
         return mOrientaion;
     }
 
     public void setmOrientaion(float mOrientaion) {
         this.mOrientaion = mOrientaion;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     @Override
@@ -63,16 +33,12 @@ public class ImageData implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.name);
-        dest.writeSerializable(this.file);
+        dest.writeString(this.url);
         dest.writeFloat(this.mOrientaion);
     }
 
     protected ImageData(Parcel in) {
-        this.id = in.readString();
-        this.name = in.readString();
-        this.file = (File) in.readSerializable();
+        this.url = in.readString();
         this.mOrientaion = in.readFloat();
     }
 

@@ -66,8 +66,8 @@ public class SlidingSplashView extends FrameLayout {
         tabLayout.setupWithViewPager(mViewPager,true);
     }
 
-    public void addImage(String path){
-        mViewPagerAdapter.addImage(path);
+    public void addImage(String url){
+        mViewPagerAdapter.addImage(url);
     }
 
     public void setImageResources(@NonNull @ArrayRes @Size(min = 2) int[] imageResources){

@@ -3,12 +3,10 @@ package com.carmudi.exam.customview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Size;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,9 +14,9 @@ import android.widget.ImageView;
 import com.carmudi.exam.R;
 import com.carmudi.exam.customview.listener.OnItemClickListener;
 import com.carmudi.exam.customview.listener.OnSetImageListener;
-import com.carmudi.exam.util.ImageUtil;
 
-import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -32,17 +30,21 @@ public class ImageViewPagerAdapter extends ViewPagerAdapter {
     protected OnItemClickListener mOnPagerItemClick;
     protected OnSetImageListener mOnSetImageListener;
 
-    protected ArrayList<String> paths;
+    protected ArrayList<String> urls;
 
     public ImageViewPagerAdapter(Context context,@NonNull OnSetImageListener onSetImageListener ) {
         mContext = context;
         mOnSetImageListener = onSetImageListener;
-        paths = new ArrayList<String>();
+        urls = new ArrayList<>();
     }
 
     @Override
     public View getItem(final int position) {
         final ImageView imageView = (ImageView) LayoutInflater.from(mContext).inflate(R.layout.item_view_pager_image,null);
+
+
+        new DownLoadImageTask(imageView).execute(urls.get(position));
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,69 +53,80 @@ public class ImageViewPagerAdapter extends ViewPagerAdapter {
                 }
 
 
-//                        Intent intent = new Intent(mContext,
-//                                ImageFullScreenActivity.class);
-//                        intent.putExtra("image_path", paths.get(position));
-//                mContext.startActivity(intent);
-              /*  ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(context,
-                                imageSwitcher.getCurr, "image");
-                startActivityForResult(intent, REQUEST_IMAGE_VIEW, options.toBundle());*/
 
             }
         });
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        options.inSampleSize = 2;
-        //place bitmapoptions back when needed
-        Bitmap bitmap = BitmapFactory.decodeFile(paths.get(position), options);
-
-        int rotationDegree = ImageUtil.getExifRotation(ImageUtil
-                .getFromMediaUri(
-                        mContext,
-                        mContext.getContentResolver(),
-                        Uri.parse(new File(paths.get(position)).toString())));
-
-        if (rotationDegree > 0) {
-            Matrix matrix = new Matrix();
-            matrix.setRotate(rotationDegree);
-            Log.w(TAG, "recreating bitmap with rotation of " + rotationDegree + " degrees" );
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        }
 
         if(mOnSetImageListener != null ){
             mOnSetImageListener.setImage(imageView,position);
-        }
-        else{
-            //imageView.setImageResource(mImageResources[position]);
-            //if(bitmap != null)
-            {
-                imageView.setImageBitmap(
-                        //scaleBitmapDown(
-                        bitmap
-                        //      , 1200)
-                );
-            }
-            //imageView.setImagesetImageURI(Uri.fromFile(new File(paths.get(position))));
         }
         return imageView;
     }
 
     @Override
     public int getCount() {
-        return paths.size();
+        return urls.size();
     }
 
     public void setImageResources(@NonNull @ArrayRes @Size(min = 2) int[] imageResources){
     }
 
-    public void addImage(String path){
-        paths.add(path);
+    public void addImage(String url){
+        urls.add(url);
         notifyDataSetChanged();
     }
 
     public void setOnPagerItemClick(@NonNull OnItemClickListener onPagerItemClickListener){
         mOnPagerItemClick = onPagerItemClickListener;
+    }
+
+        /*
+        AsyncTask enables proper and easy use of the UI thread. This class
+        allows to perform background operations and publish results on the UI
+        thread without having to manipulate threads and/or handlers.
+     */
+
+    /*
+        final AsyncTask<Params, Progress, Result>
+            execute(Params... params)
+                Executes the task with the specified parameters.
+     */
+    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+        ImageView imageView;
+
+        public DownLoadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
+
+        /*
+            doInBackground(Params... params)
+                Override this method to perform a computation on a background thread.
+         */
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try{
+                InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
+                logo = BitmapFactory.decodeStream(is);
+            }catch(Exception e){ // Catch the download exception
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
+        protected void onPostExecute(Bitmap result){
+            imageView.setImageBitmap(result);
+        }
+
+
     }
 }

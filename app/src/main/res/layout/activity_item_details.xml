@@ -7,13 +7,6 @@
     android:layout_height="wrap_content"
     android:weightSum="1"
     android:orientation="vertical">
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:indeterminate="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 
     <RelativeLayout
         android:id="@+id/llTitle"

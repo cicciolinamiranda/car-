@@ -41,7 +41,7 @@ public class ImageSwitcher extends SlidingSplashView {
 
     public void addImageData(ImageData imageData){
         imageDatas.add(imageData);
-        this.addImage(imageData.getPathName());
+        this.addImage(imageData.getUrl());
     }
     public ImageData getImageData(int index){
         return imageDatas.get(index);
@@ -54,7 +54,7 @@ public class ImageSwitcher extends SlidingSplashView {
     public void nextImage(){
         if(currImageDataIndex < imageDatas.size()-1){
             currImageDataIndex++;
-            this.setImagePath(imageDatas.get(currImageDataIndex).getPathName());
+            this.setImagePath(imageDatas.get(currImageDataIndex).getUrl());
         }/*else{
             currImageDataIndex = 0; //index go around
         }*/
@@ -63,14 +63,14 @@ public class ImageSwitcher extends SlidingSplashView {
     public void prevImage(){
         if(currImageDataIndex > 0){
             currImageDataIndex--;
-            this.setImagePath(imageDatas.get(currImageDataIndex).getPathName());
+            this.setImagePath(imageDatas.get(currImageDataIndex).getUrl());
         }
     }
 
     public void goToCurrentImage(){
         currImageDataIndex = imageDatas.size()-1;
-        this.setImagePath(imageDatas.get(currImageDataIndex).getPathName());
-        Log.d(TAG,"goToCurrentImage:"+ imageDatas.get(currImageDataIndex).getPathName());
+        this.setImagePath(imageDatas.get(currImageDataIndex).getUrl());
+        Log.d(TAG,"goToCurrentImage:"+ imageDatas.get(currImageDataIndex).getUrl());
     }
 
     public ImageData getCurrentImage(){
@@ -79,10 +79,10 @@ public class ImageSwitcher extends SlidingSplashView {
 
     public ArrayList<String> getImageList(){
 
-        ArrayList<String> images = new ArrayList<String>();
+        ArrayList<String> images = new ArrayList<>();
 
         for(ImageData data: imageDatas) {
-            images.add(data.getPathName());
+            images.add(data.getUrl());
         }
 
         return images;
