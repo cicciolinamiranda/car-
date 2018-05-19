@@ -1,10 +1,7 @@
 package com.carmudi.exam.presenter;
 
-import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
-import com.carmudi.exam.R;
 import com.carmudi.exam.client.ApiException;
 import com.carmudi.exam.client.JsonUtil;
 import com.carmudi.exam.client.asynctask.RestGetItemsAsyncTask;
@@ -21,18 +18,14 @@ import java.util.List;
 
 public class MainPresenter {
 
-    private Activity mActivity;
-    private Context mContext;
     private Listener mListener;
 
-    public MainPresenter(Activity activity, Context context, MainPresenter.Listener listener) {
-        this.mActivity = activity;
-        this.mContext = context;
+    public MainPresenter(MainPresenter.Listener listener) {
         this.mListener = listener;
     }
 
-    public void getData(final int page, final String sortby, final int numperpage) {
-        new RestGetItemsAsyncTask(this.mContext.getString(R.string.endpoint_server), page, numperpage, sortby,
+    public void getData(final String endpoint, final int page, final String sortby, final int numperpage) {
+        new RestGetItemsAsyncTask(endpoint, page, numperpage, sortby,
                 new RestGetItemsAsyncTask.Listener() {
                     @Override
                     public void result(String result) {

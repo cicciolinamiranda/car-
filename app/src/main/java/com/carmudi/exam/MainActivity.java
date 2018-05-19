@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
             }
         });
 
-        this.mainPresenter = new MainPresenter(this, this, this);
+        this.mainPresenter = new MainPresenter(this);
 
         spinnerSortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
             @Override
             public void run() {
 
-                mainPresenter.getData(currentPage, sortByType.getQueryValue(), NUM_PER_PAGE);
+                mainPresenter.getData(getString(R.string.endpoint_server), currentPage, sortByType.getQueryValue(), NUM_PER_PAGE);
             }
         });
         startGetData.start();
