@@ -2,6 +2,9 @@
 Display car catalog contents, parses the JSON-formatted response and displays the data. The data consists
 of a list of products that should be shown in a vertical scrolling list. 
 
+## IDE used ##
+Android Studio 2.3.1
+
 ## Project Structure ##
 
 ### client ###
