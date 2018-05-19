@@ -34,5 +34,5 @@ Design pattern used on this app.
 26(Oreo)
 
 ### Minimum SDK ###
-26(Jelly Bean)
+18(Jelly Bean)
 
