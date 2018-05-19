@@ -79,7 +79,7 @@ public class ListCarAdapter extends ArrayAdapter<Results> {
 
         }
 
-        tvCarPrice.setText("Price ("+currency.toLowerCase()+") :"+Util.getInstance().truncateNumber(price));
+        tvCarPrice.setText("Price ("+currency.toLowerCase()+") :"+Util.getInstance().truncateNumber(price, true));
         tvCarName.setText(web.get(position).getData().getOriginal_name());
 
         TextView tvCarMileage = rowView.findViewById(R.id.tv_car_mileage_list_car_data);

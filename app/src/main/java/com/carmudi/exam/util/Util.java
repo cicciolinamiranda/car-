@@ -28,18 +28,28 @@ public class Util {
                 "kMGTPE".charAt(exp-1));
     }
 
-    public String truncateNumber(double doubleNumber) {
+    public String truncateNumber(double doubleNumber, boolean isOneLetterOnly) {
         float million = 1000000L;
         float billion = 1000000000L;
         float trillion = 1000000000000L;
         float number = Math.round(doubleNumber);
-        if ((number >= million) && (number < billion)) {
+        if ((number >= million) && (number < billion) && isOneLetterOnly) {
             float fraction = calculateFraction(number, million);
             return Float.toString(fraction) + "M";
-        } else if ((number >= billion) && (number < trillion)) {
+        }
+        else if ((number >= million) && (number < billion) && !isOneLetterOnly) {
+            float fraction = calculateFraction(number, million);
+            return Float.toString(fraction) + "mil";
+        }
+        else if ((number >= billion) && (number < trillion) && isOneLetterOnly) {
             float fraction = calculateFraction(number, billion);
             return Float.toString(fraction) + "B";
         }
+        else if ((number >= billion) && (number < trillion) && !isOneLetterOnly) {
+            float fraction = calculateFraction(number, billion);
+            return Float.toString(fraction) + "bil";
+        }
+
         return Float.toString(number);
     }
 
