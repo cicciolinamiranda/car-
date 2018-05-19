@@ -2,12 +2,16 @@ package com.carmudi.exam.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.carmudi.exam.ItemDetailsActivity;
@@ -18,6 +22,8 @@ import com.carmudi.exam.client.model.Results;
 import com.carmudi.exam.util.Util;
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +49,11 @@ public class ListCarAdapter extends ArrayAdapter<Results> {
         View rowView = inflater.inflate(R.layout.list_car_data, null, true);
         TextView tvCarName = rowView.findViewById(R.id.tv_car_name_list_car_data);
         TextView tvCarPrice = rowView.findViewById(R.id.tv_car_price_list_car_data);
+        ImageView thumbnail = rowView.findViewById(R.id.thumbnail);
+
+        if(web.get(position).getImages() != null && web.get(position).getImages().length > 0) {
+            new ListCarAdapter.DownLoadImageTask(thumbnail).execute(web.get(position).getImages()[0].getUrl());
+        }
 
         double price = 0;
 
@@ -101,6 +112,38 @@ public class ListCarAdapter extends ArrayAdapter<Results> {
 
 
         return rowView;
+    }
+
+
+    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+        ImageView imageView;
+
+        public DownLoadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
+
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try{
+                InputStream is = new URL(urlOfImage).openStream();
+
+                logo = BitmapFactory.decodeStream(is);
+            }catch(Exception e){ // Catch the download exception
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
+        protected void onPostExecute(Bitmap result){
+            imageView.setImageBitmap(result);
+        }
+
+
     }
 
 }
