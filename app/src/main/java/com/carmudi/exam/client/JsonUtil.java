@@ -2,7 +2,9 @@ package com.carmudi.exam.client;
 
 import com.carmudi.exam.client.model.CarDataModel;
 import com.carmudi.exam.client.model.Data;
+import com.carmudi.exam.client.model.Meta;
 import com.carmudi.exam.client.model.Results;
+import com.carmudi.exam.client.model.SimplesData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -60,6 +62,14 @@ public class JsonUtil {
             return new TypeToken<List<Data>>(){}.getType();
         }
 
+        if ("Meta".equalsIgnoreCase(className)) {
+            return new TypeToken<List<Meta>>(){}.getType();
+        }
+
+        if ("SimplesData".equalsIgnoreCase(className)) {
+            return new TypeToken<List<SimplesData>>(){}.getType();
+        }
+
         return new TypeToken<List<Object>>(){}.getType();
     }
 
@@ -76,6 +86,10 @@ public class JsonUtil {
 
         if ("Data".equalsIgnoreCase(className)) {
             return new TypeToken<Data>(){}.getType();
+        }
+
+        if ("SimplesData".equalsIgnoreCase(className)) {
+            return new TypeToken<SimplesData>(){}.getType();
         }
 
         return new TypeToken<Object>(){}.getType();

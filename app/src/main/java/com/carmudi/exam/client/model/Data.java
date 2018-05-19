@@ -5,6 +5,9 @@ package com.carmudi.exam.client.model;
  */
 
 public class Data {
+
+    private Object simples;
+
     private String product_owner;
 
     private String show_homephone;
@@ -137,8 +140,6 @@ public class Data {
 
     private String brand_model;
 
-    private Simples simples;
-
     private String is_certified;
 
     private String name;
@@ -233,6 +234,14 @@ public class Data {
     public void setListing_country (String listing_country)
     {
         this.listing_country = listing_country;
+    }
+
+    public Object getSimples() {
+        return simples;
+    }
+
+    public void setSimples(Object simples) {
+        this.simples = simples;
     }
 
     public String getExterior ()
@@ -855,16 +864,6 @@ public class Data {
         this.brand_model = brand_model;
     }
 
-    public Simples getSimples ()
-    {
-        return simples;
-    }
-
-    public void setSimples (Simples simples)
-    {
-        this.simples = simples;
-    }
-
     public String getIs_certified ()
     {
         return is_certified;
@@ -1146,7 +1145,7 @@ public class Data {
     @Override
     public String toString()
     {
-        return "ClassPojo [product_owner = "+product_owner+", show_homephone = "+show_homephone+", interior = "+interior+", listing_country = "+listing_country+", exterior = "+exterior+", original_price = "+original_price+", fk_country_region_city = "+fk_country_region_city+", equipment = "+equipment+", show_listing_address = "+show_listing_address+", fk_country = "+fk_country+", google_place_id = "+google_place_id+", listing_start = "+listing_start+", transmission_position = "+transmission_position+", attribute_set_name = "+attribute_set_name+", top_position = "+top_position+", urlkey_details = "+urlkey_details+", doors_position = "+doors_position+", root_category = "+root_category+", approved = "+approved+", fk_catalog_brand = "+fk_catalog_brand+", description = "+description+", drive_type_id = "+drive_type_id+", power = "+power+", premium_listing = "+premium_listing+", activated_at = "+activated_at+", fk_customer = "+fk_customer+", listing_region = "+listing_region+", location_latitude = "+location_latitude+", is_agent = "+is_agent+", condition_id = "+condition_id+", mileage = "+mileage+", price_not_available = "+price_not_available+", condition = "+condition+", listing_type = "+listing_type+", status = "+status+", seller_is_trusted = "+seller_is_trusted+", sku = "+sku+", agency_name = "+agency_name+", transmission = "+transmission+", attribute_set_id = "+attribute_set_id+", color_family_id = "+color_family_id+", original_name = "+original_name+", warranty_years_id = "+warranty_years_id+", url = "+url+", transmission_id = "+transmission_id+", fk_catalog_brand_model = "+fk_catalog_brand_model+", agency_address = "+agency_address+", price = "+price+", item_contact_homephone = "+item_contact_homephone+", listing_area = "+listing_area+", drive_type_position = "+drive_type_position+", mileage_not_available = "+mileage_not_available+", agency_city = "+agency_city+", config_id = "+config_id+", status_supplier_config = "+status_supplier_config+", rejected_comment = "+rejected_comment+", show_officephone = "+show_officephone+", listing_city = "+listing_city+", alternate_sku = "+alternate_sku+", condition_position = "+condition_position+", brand_model_edition = "+brand_model_edition+", warranty_years_position = "+warranty_years_position+", item_contact_mobile = "+item_contact_mobile+", id = "+id+", fuel_position = "+fuel_position+", brand_model = "+brand_model+", simples = "+simples+", is_certified = "+is_certified+", name = "+name+", fuel = "+fuel+", original_price_currency = "+original_price_currency+", id_catalog_config = "+id_catalog_config+", google_formatted_address = "+google_formatted_address+", fk_customer_address = "+fk_customer_address+", price_conditions_position = "+price_conditions_position+", warranty_type_id = "+warranty_type_id+", price_conditions_id = "+price_conditions_id+", attribute_set_name_local = "+attribute_set_name_local+", item_contact_name = "+item_contact_name+", warranty_type_position = "+warranty_type_position+", location_longitude = "+location_longitude+", listing_end = "+listing_end+", fk_vertical = "+fk_vertical+", item_contact_email = "+item_contact_email+", agency_logo = "+agency_logo+", show_mobile = "+show_mobile+", fuel_id = "+fuel_id+", product_owner_url_key = "+product_owner_url_key+", doors_id = "+doors_id+", color_family_position = "+color_family_position+", brand = "+brand+"," +
-                " new-product = "+new_product+", attributes = "+attributes+", fk_country_region = "+fk_country_region+", fk_country_region_city_area = "+fk_country_region_city_area+"]";
+        return "ClassPojo [product_owner = "+product_owner+", show_homephone = "+show_homephone+", interior = "+interior+", listing_country = "+listing_country+", exterior = "+exterior+", original_price = "+original_price+", fk_country_region_city = "+fk_country_region_city+", equipment = "+equipment+", show_listing_address = "+show_listing_address+", fk_country = "+fk_country+", google_place_id = "+google_place_id+", listing_start = "+listing_start+", transmission_position = "+transmission_position+", attribute_set_name = "+attribute_set_name+", top_position = "+top_position+", urlkey_details = "+urlkey_details+", doors_position = "+doors_position+", root_category = "+root_category+", approved = "+approved+", fk_catalog_brand = "+fk_catalog_brand+", description = "+description+", drive_type_id = "+drive_type_id+", power = "+power+", premium_listing = "+premium_listing+", activated_at = "+activated_at+", fk_customer = "+fk_customer+", listing_region = "+listing_region+", location_latitude = "+location_latitude+", is_agent = "+is_agent+", condition_id = "+condition_id+", mileage = "+mileage+", price_not_available = "+price_not_available+", condition = "+condition+", listing_type = "+listing_type+", status = "+status+", seller_is_trusted = "+seller_is_trusted+", sku = "+sku+", agency_name = "+agency_name+", transmission = "+transmission+", attribute_set_id = "+attribute_set_id+", color_family_id = "+color_family_id+", original_name = "+original_name+", warranty_years_id = "+warranty_years_id+", url = "+url+", transmission_id = "+transmission_id+", fk_catalog_brand_model = "+fk_catalog_brand_model+", agency_address = "+agency_address+", price = "+price+", item_contact_homephone = "+item_contact_homephone+", listing_area = "+listing_area+", drive_type_position = "+drive_type_position+", mileage_not_available = "+mileage_not_available+", agency_city = "+agency_city+", config_id = "+config_id+", status_supplier_config = "+status_supplier_config+", rejected_comment = "+rejected_comment+", show_officephone = "+show_officephone+", listing_city = "+listing_city+", alternate_sku = "+alternate_sku+", condition_position = "+condition_position+", brand_model_edition = "+brand_model_edition+", warranty_years_position = "+warranty_years_position+", item_contact_mobile = "+item_contact_mobile+", id = "+id+", fuel_position = "+fuel_position+", brand_model = "+brand_model+", is_certified = "+is_certified+", name = "+name+", fuel = "+fuel+", original_price_currency = "+original_price_currency+", id_catalog_config = "+id_catalog_config+", google_formatted_address = "+google_formatted_address+", fk_customer_address = "+fk_customer_address+", price_conditions_position = "+price_conditions_position+", warranty_type_id = "+warranty_type_id+", price_conditions_id = "+price_conditions_id+", attribute_set_name_local = "+attribute_set_name_local+", item_contact_name = "+item_contact_name+", warranty_type_position = "+warranty_type_position+", location_longitude = "+location_longitude+", listing_end = "+listing_end+", fk_vertical = "+fk_vertical+", item_contact_email = "+item_contact_email+", agency_logo = "+agency_logo+", show_mobile = "+show_mobile+", fuel_id = "+fuel_id+", product_owner_url_key = "+product_owner_url_key+", doors_id = "+doors_id+", color_family_position = "+color_family_position+", brand = "+brand+"," +
+                " new-product = "+new_product+", attributes = "+attributes+", fk_country_region = "+fk_country_region+", fk_country_region_city_area = "+fk_country_region_city_area+", simples = "+simples+"]";
     }
 }

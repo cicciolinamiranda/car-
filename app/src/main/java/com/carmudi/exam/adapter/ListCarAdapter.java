@@ -16,8 +16,10 @@ import com.carmudi.exam.client.ApiException;
 import com.carmudi.exam.client.JsonUtil;
 import com.carmudi.exam.client.model.Results;
 import com.carmudi.exam.util.Util;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cicciolina on 5/18/18.
@@ -53,7 +55,31 @@ public class ListCarAdapter extends ArrayAdapter<Results> {
                 e.printStackTrace();
             }
         }
-        tvCarPrice.setText("Price: "+Util.getInstance().truncateNumber(price));
+
+        String currency = "";
+
+        if(web.get(position).getData().getSimples() != null) {
+
+            LinkedTreeMap<String, LinkedTreeMap> simplesDataMap = (LinkedTreeMap<String, LinkedTreeMap>) web.get(position).getData().getSimples();
+
+            //Key inside simples json object is dynamic. Need to manually parse
+            Map.Entry<String,LinkedTreeMap> entrySimplesDataMap = simplesDataMap.entrySet().iterator().next();
+            String key = entrySimplesDataMap.getKey();
+
+            LinkedTreeMap<String, LinkedTreeMap> insideSimpleDatMap = simplesDataMap.get(key);
+            LinkedTreeMap<String, String> metaMap = insideSimpleDatMap.get("meta");
+
+            for (Map.Entry<String, String> metaEntry : metaMap.entrySet())
+            {
+                if(metaEntry.getKey().equals("original_price_currency")) {
+                    currency = metaEntry.getValue();
+                    break;
+                }
+            }
+
+        }
+
+        tvCarPrice.setText("Price ("+currency.toLowerCase()+") :"+Util.getInstance().truncateNumber(price));
         tvCarName.setText(web.get(position).getData().getOriginal_name());
 
         TextView tvCarMileage = rowView.findViewById(R.id.tv_car_mileage_list_car_data);

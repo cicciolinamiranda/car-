@@ -15,6 +15,25 @@
         android:orientation="horizontal"
         android:paddingRight="5dp">
 
+        <!--Price-->
+        <RelativeLayout
+            android:id="@+id/layout_item_detail_car_price"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="17dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textItemDetailCarPrice"
+                android:textStyle="bold"
+                android:textColor="@color/pb_blue_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+        </RelativeLayout>
+
     </RelativeLayout>
 
 
@@ -38,63 +57,130 @@
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:orientation="vertical">
 
-            <!--Save and Unsave-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:orientation="horizontal">
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtNumberOfBookmarks"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:text="@string/suffix_like_post_label_singular"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:paddingLeft="5dp" />-->
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_access_mode"-->
-                    <!--android:layout_width="23dp"-->
-                    <!--android:layout_height="23dp"-->
-                    <!--android:layout_marginLeft="50dp"-->
-                    <!--android:layout_alignParentEnd="true"/>-->
-
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_bookmark_asset"-->
-                    <!--android:layout_gravity="right"-->
-                    <!--android:layout_width="23dp"-->
-                    <!--android:layout_toLeftOf="@id/iv_access_mode"-->
-                    <!--android:layout_height="23dp"-->
-                    <!--android:tint="@color/grey_500"-->
-                    <!--android:background="@drawable/ic_star_border_grey" />-->
-
-
-            </RelativeLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:orientation="horizontal">
 
-                <!--<ImageView-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:tint="@color/grey_500"-->
-                    <!--android:background="@drawable/ic_person" />-->
-
                 <TextView
-                    android:id="@+id/textDeviceName"
+                    android:id="@+id/textItemDetailCarName"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="5dp" />
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llLocation"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="@color/grey_500"
+                    android:background="@drawable/ic_my_location" />
+
+                <TextView
+                    android:id="@+id/tvItemDetailCarLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llItemDetailContactPersonName"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="@color/grey_500"
+                    android:background="@drawable/ic_person" />
+
+                <TextView
+                    android:id="@+id/tvItemDetailContactPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llItemDetailContactPersonEmail"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="@color/grey_500"
+                    android:src="@android:drawable/ic_dialog_email" />
+
+                <TextView
+                    android:id="@+id/tvItemDetailContactPersonEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llItemDetailContactPersonMobileNum"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="@color/grey_500"
+                    android:src="@drawable/ic_phonelink_ring_white_24dp" />
+
+                <TextView
+                    android:id="@+id/tvItemDetailContactPersonMobileNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llItemDetailContactPersonHomePhoneNum"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="@color/grey_500"
+                    android:src="@android:drawable/stat_sys_phone_call" />
+
+                <TextView
+                    android:id="@+id/tvItemDetailContactPersonHomePhoneNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
 
             </LinearLayout>
 
@@ -119,28 +205,6 @@
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/llLocation"
-                android:orientation="horizontal">
-
-                <!--<ImageView-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:tint="@color/grey_500"-->
-                    <!--android:background="@drawable/ic_my_location" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtVwAssetLocation"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:hint="@string/loading_location"-->
-                    <!--android:paddingLeft="5dp" />-->
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lltags_card"

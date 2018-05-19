@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|end"
                         android:text="0Php"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_car_mileage_list_car_data"

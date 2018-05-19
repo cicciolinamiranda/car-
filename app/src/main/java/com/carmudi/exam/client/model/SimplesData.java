@@ -1,11 +1,10 @@
 package com.carmudi.exam.client.model;
 
 /**
- * Created by cicciolina on 5/18/18.
+ * Created by cicciolina on 5/19/18.
  */
 
-public class TO002CAAASHQJINTCARID
-{
+public class SimplesData {
     private Attributes attributes;
 
     private Meta meta;
