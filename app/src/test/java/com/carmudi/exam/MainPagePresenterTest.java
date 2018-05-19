@@ -24,7 +24,6 @@ import static org.junit.Assert.assertEquals;
  * Created by cicciolina on 5/19/18.
  */
 
-//@RunWith(MockitoJUnitRunner.class)
 @Config(manifest=Config.NONE)
 @RunWith(RobolectricTestRunner.class)
 public class MainPagePresenterTest {
