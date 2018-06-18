@@ -158,6 +158,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
 
     @Override
     public void errorOccurred(String error) {
-
+        progressBar.setVisibility(View.GONE);
     }
 }

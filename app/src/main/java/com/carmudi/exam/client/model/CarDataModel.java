@@ -1,17 +1,23 @@
 package com.carmudi.exam.client.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by cicciolina on 5/18/18.
  */
 
 public class CarDataModel
 {
+    @SerializedName("session")
     private Session session;
 
+    @SerializedName("success")
     private String success;
 
+    @SerializedName("messages")
     private Messages messages;
 
+    @SerializedName("metadata")
     private Metadata metadata;
 
     public Session getSession ()

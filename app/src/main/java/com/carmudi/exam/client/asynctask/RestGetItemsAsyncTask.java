@@ -2,10 +2,6 @@ package com.carmudi.exam.client.asynctask;
 
 import android.os.AsyncTask;
 
-import com.carmudi.exam.client.HttpClient;
-
-import org.json.JSONObject;
-
 /**
  * Created by cicciolina on 5/18/18.
  */
@@ -33,14 +29,14 @@ public class RestGetItemsAsyncTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... voids) {
 
-        JSONObject obj = HttpClient.SendHttpGetWithoutParamAndAuth(this.endpoint
-                +"/page:" +this.page+
-                "/maxitems:" +this.numperPage+
-                "/sort:"+this.sortBy);
+//        JSONObject obj = HttpClient.SendHttpGetWithoutParamAndAuth(this.endpoint
+//                +"/page:" +this.page+
+//                "/maxitems:" +this.numperPage+
+//                "/sort:"+this.sortBy);
 
-        String result = obj.toString();
+//        String result = obj.toString();
 
-        return result;
+        return "";
     }
 
     @Override
