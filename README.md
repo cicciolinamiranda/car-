@@ -30,6 +30,17 @@ Custom List View adapters
 ## Model-View-Presenter ##
 Design pattern used on this app.
 
+## Libraries Used ##
+
+### Retrofit 2###
+Type-safe HTTP client for Android and Java by Square, Inc.
+
+### Google Api Client for Google Location###
+Needs Google Location API for parsing Geo Location to a readable address
+
+### RoboElectric Test Runner ###
+Unit test framework for android. Very useful when testing Async tasks and API calls.
+
 ## SDK Version ##
 
 ### Targek SDK ###
